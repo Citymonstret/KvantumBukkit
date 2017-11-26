@@ -18,7 +18,6 @@ name: KvantumBukkit
 main: xyz.kvantum.bukkit.KvantumPlugin
 load: STARTUP
 version: 0.1
-description: >
-             A web server for Bukkit
+description: A web server for Bukkit
 authors: [Citymonstret]
 database: false

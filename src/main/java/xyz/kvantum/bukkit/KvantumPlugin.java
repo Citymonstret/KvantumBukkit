@@ -17,9 +17,12 @@ package xyz.kvantum.bukkit;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import xyz.kvantum.bukkit.objects.KvantumPlayer;
+import xyz.kvantum.bukkit.objects.PlayerManager;
 import xyz.kvantum.server.api.config.CoreConfig;
 import xyz.kvantum.server.api.core.Kvantum;
 import xyz.kvantum.server.api.util.RequestManager;
+import xyz.kvantum.server.api.views.rest.service.SearchService;
 import xyz.kvantum.server.implementation.ServerContext;
 
 import java.util.Optional;
@@ -27,6 +30,7 @@ import java.util.Optional;
 public class KvantumPlugin extends JavaPlugin
 {
 
+    private final PlayerManager playerManager = new PlayerManager();
     private Kvantum kvantum;
 
     @Override
@@ -50,6 +54,10 @@ public class KvantumPlugin extends JavaPlugin
     public void onEnable()
     {
         this.getLogger().info( "Starting Kvantum..." );
+
+        SearchService.<KvantumPlayer, KvantumPlayer>builder().filter( "api/players" ).queryObjectType( KvantumPlayer
+                .class ).resultProvider( playerManager ).build().registerHandler();
+
         this.kvantum.start();
     }
 
@@ -58,13 +66,6 @@ public class KvantumPlugin extends JavaPlugin
     {
         this.getLogger().info( "Stopping kvantum" );
         this.kvantum.stopServer();
-        try
-        {
-            Thread.sleep( 5_0000 ); // Wait for kvantum instance to stop completely...
-        } catch ( final InterruptedException e )
-        {
-            e.printStackTrace();
-        }
     }
 
     private void presetConfiguration()
@@ -73,6 +74,7 @@ public class KvantumPlugin extends JavaPlugin
         CoreConfig.verbose = false;
         CoreConfig.enableInputThread = false;
         CoreConfig.exitOnStop = false;
+        CoreConfig.enablePlugins = false;
     }
 
 }

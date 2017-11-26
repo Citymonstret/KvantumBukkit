@@ -18,12 +18,12 @@ package xyz.kvantum.bukkit;
 import org.apache.commons.text.StrSubstitutor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Server;
 import xyz.kvantum.server.api.config.CoreConfig;
 import xyz.kvantum.server.api.core.ServerImplementation;
 import xyz.kvantum.server.api.logging.LogContext;
 import xyz.kvantum.server.api.logging.LogWrapper;
 import xyz.kvantum.server.api.util.Assert;
+import xyz.kvantum.server.implementation.Server;
 
 import java.io.PrintStream;
 import java.lang.reflect.Field;
