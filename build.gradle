@@ -1,0 +1,41 @@
+group 'xyz.kvantum.bukkit'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.1'
+        classpath 'gradle.plugin.nl.javadude.gradle.plugins:license-gradle-plugin:0.14.0'
+    }
+}
+
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'com.github.hierynomus.license'
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+license {
+    header rootProject.file('HEADER')
+    mapping 'java', 'SLASHSTAR_STYLE'
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://jitpack.io' }
+    maven { url 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.16.18'
+    compile 'xyz.kvantum.Kvantum:Implementation:31aaed4a6f'
+    compileOnly 'org.bukkit:bukkit:1.12.2-R0.1-SNAPSHOT'
+}
+
+build.dependsOn licenseFormat
+build.finalizedBy shadowJar
