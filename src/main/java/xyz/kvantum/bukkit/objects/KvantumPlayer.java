@@ -21,6 +21,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.json.simple.JSONObject;
 import xyz.kvantum.server.api.orm.annotations.KvantumConstructor;
 import xyz.kvantum.server.api.orm.annotations.KvantumField;
 import xyz.kvantum.server.api.orm.annotations.KvantumInsert;
@@ -83,6 +84,16 @@ public class KvantumPlayer
         }
         this.complete = true;
         this.online = false;
+    }
+
+    public JSONObject toJson()
+    {
+        final JSONObject object = new JSONObject();
+        object.put( "username", this.username );
+        object.put( "uuid", this.uuid );
+        object.put( "online", this.online );
+        object.put( "world", this.world );
+        return object;
     }
 
 }

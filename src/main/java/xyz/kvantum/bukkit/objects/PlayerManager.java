@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
+import xyz.kvantum.bukkit.util.PlayerUtil;
 import xyz.kvantum.server.api.util.SearchResultProvider;
 
 import java.util.ArrayList;
@@ -65,11 +66,7 @@ public class PlayerManager implements SearchResultProvider<KvantumPlayer, Kvantu
             }
         } else
         {
-            // Load all players
-            for ( final Player player : Bukkit.getOnlinePlayers() )
-            {
-                kvantumPlayers.add( new KvantumPlayer( player ) );
-            }
+            kvantumPlayers.addAll( PlayerUtil.getOnlinePlayers() );
         }
         return kvantumPlayers;
     }

@@ -33,8 +33,9 @@ repositories {
 
 dependencies {
     compileOnly 'org.projectlombok:lombok:1.16.18'
-    compile 'xyz.kvantum.Kvantum:Implementation:68171a5103'
+    compile 'com.github.IntellectualSites.Kvantum:Implementation:1.1'
     compileOnly 'org.bukkit:bukkit:1.12.2-R0.1-SNAPSHOT'
+    compile 'com.j2html:j2html:1.2.2'
 }
 
 build.dependsOn licenseFormat
