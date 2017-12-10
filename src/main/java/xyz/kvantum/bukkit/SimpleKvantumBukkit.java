@@ -3,7 +3,6 @@ package xyz.kvantum.bukkit;
 import com.intellectualsites.configurable.ConfigurationFactory;
 import lombok.Getter;
 import xyz.kvantum.bukkit.config.BukkitConfig;
-import xyz.kvantum.bukkit.views.SimpleWebPage;
 import xyz.kvantum.server.api.config.CoreConfig;
 import xyz.kvantum.server.api.logging.Logger;
 import xyz.kvantum.server.api.views.staticviews.StaticViewManager;
@@ -42,10 +41,9 @@ public final class SimpleKvantumBukkit extends KvantumBukkit
     {
         try
         {
-            StaticViewManager.generate( getGetters() );
-            if ( BukkitConfig.SimplePage.enableDefaultView )
+            if ( BukkitConfig.API.enableGetters )
             {
-                StaticViewManager.generate( SimpleWebPage.class );
+                StaticViewManager.generate( getGetters() );
             }
         } catch ( final Exception e )
         {

@@ -15,11 +15,13 @@ public final class BukkitConfig
     {
     }
 
+
     @ConfigSection
-    public static class SimplePage
+    public static final class API
     {
-        public static boolean enableDefaultView = true;
-        public static String title = "KvantumBukkit";
+
+        public static boolean enableGetters = true;
+
     }
 
 }
