@@ -4,9 +4,16 @@ import com.intellectualsites.configurable.ConfigurationImplementation;
 import com.intellectualsites.configurable.annotations.ConfigSection;
 import com.intellectualsites.configurable.annotations.Configuration;
 
+/**
+ * KvantumBukkit configuration file
+ */
 @Configuration( implementation = ConfigurationImplementation.YAML )
-public class BukkitConfig
+public final class BukkitConfig
 {
+
+    private BukkitConfig()
+    {
+    }
 
     @ConfigSection
     public static class SimplePage

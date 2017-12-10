@@ -1,5 +1,6 @@
 package xyz.kvantum.bukkit.objects;
 
+import lombok.NonNull;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
@@ -15,7 +16,7 @@ public class PlayerManager implements SearchResultProvider<KvantumPlayer, Kvantu
 {
 
     @Override
-    public Collection<? extends KvantumPlayer> getResults(final KvantumPlayer kvantumPlayer)
+    public Collection<? extends KvantumPlayer> getResults(@NonNull final KvantumPlayer kvantumPlayer)
     {
         final Collection<KvantumPlayer> kvantumPlayers = new ArrayList<>();
         if ( !kvantumPlayer.getUsername().isEmpty() )

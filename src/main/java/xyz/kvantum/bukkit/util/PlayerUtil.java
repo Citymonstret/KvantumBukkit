@@ -1,5 +1,6 @@
 package xyz.kvantum.bukkit.util;
 
+import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -36,7 +37,7 @@ public class PlayerUtil
      * @param bukkitPlayer Bukkit player
      * @return Kvantum representation
      */
-    public static KvantumPlayer toKvantumPlayer(final Player bukkitPlayer)
+    public static KvantumPlayer toKvantumPlayer(@NonNull final Player bukkitPlayer)
     {
         return new KvantumPlayer( bukkitPlayer );
     }
@@ -47,7 +48,7 @@ public class PlayerUtil
      * @param player Kvantum representation
      * @return Bukkit player
      */
-    public static Optional<Player> toBukkitPlayer(final KvantumPlayer player)
+    public static Optional<Player> toBukkitPlayer(@NonNull final KvantumPlayer player)
     {
         final Player bukkitPlayer = Bukkit.getPlayer( UUID.fromString( player.getUuid() ) );
         return Optional.ofNullable( bukkitPlayer );

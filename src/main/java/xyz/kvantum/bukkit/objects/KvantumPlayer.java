@@ -15,8 +15,10 @@
  */
 package xyz.kvantum.bukkit.objects;
 
+import edu.umd.cs.findbugs.annotations.Nullable;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
@@ -27,6 +29,9 @@ import xyz.kvantum.server.api.orm.annotations.KvantumField;
 import xyz.kvantum.server.api.orm.annotations.KvantumInsert;
 import xyz.kvantum.server.api.orm.annotations.KvantumObject;
 
+/**
+ * Kvantum representation of Bukkit {@link Player}
+ */
 @EqualsAndHashCode
 @KvantumObject
 public class KvantumPlayer
@@ -50,10 +55,17 @@ public class KvantumPlayer
     @Getter
     private boolean online;
 
+    /**
+     * Kvantum constructor
+     *
+     * @param username nullable player username
+     * @param uuid nullable player uuid
+     * @param world nullable player world
+     */
     @KvantumConstructor
-    public KvantumPlayer(@KvantumInsert( "username" ) final String username,
-                         @KvantumInsert( "uuid") final String uuid,
-                         @KvantumInsert( "world" ) final String world)
+    public KvantumPlayer(@Nullable @KvantumInsert( "username" ) final String username,
+                         @Nullable @KvantumInsert( "uuid") final String uuid,
+                         @Nullable @KvantumInsert( "world" ) final String world)
     {
         this.username = username;
         this.uuid = uuid;
@@ -61,7 +73,12 @@ public class KvantumPlayer
         this.complete = false;
     }
 
-    public KvantumPlayer(final Player bukkitPlayer)
+    /**
+     * Construct a Kvantum player from a Bukkit player
+     *
+     * @param bukkitPlayer Bukkit player
+     */
+    public KvantumPlayer(@NonNull final Player bukkitPlayer)
     {
         this.username = bukkitPlayer.getDisplayName();
         this.uuid = bukkitPlayer.getUniqueId().toString();
@@ -70,7 +87,12 @@ public class KvantumPlayer
         this.online = true;
     }
 
-    public KvantumPlayer(final OfflinePlayer offlinePlayer)
+    /**
+     * Construct a Kvantum player from a Bukkit offline player
+     *
+     * @param offlinePlayer Bukkit offline player
+     */
+    public KvantumPlayer(@NonNull final OfflinePlayer offlinePlayer)
     {
         this.username = offlinePlayer.getName();
         this.uuid = offlinePlayer.getUniqueId().toString();
@@ -86,6 +108,11 @@ public class KvantumPlayer
         this.online = false;
     }
 
+    /**
+     * Get a JSON object representing the player
+     *
+     * @return JSON object
+     */
     public JSONObject toJson()
     {
         final JSONObject object = new JSONObject();

@@ -15,6 +15,7 @@
  */
 package xyz.kvantum.bukkit;
 
+import lombok.NonNull;
 import org.apache.commons.text.StrSubstitutor;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -22,13 +23,16 @@ import xyz.kvantum.server.api.config.CoreConfig;
 import xyz.kvantum.server.api.core.ServerImplementation;
 import xyz.kvantum.server.api.logging.LogContext;
 import xyz.kvantum.server.api.logging.LogWrapper;
-import xyz.kvantum.server.api.util.Assert;
 import xyz.kvantum.server.implementation.Server;
 
 import java.io.PrintStream;
 import java.lang.reflect.Field;
 
-class BukkitLogWrapper implements LogWrapper
+/**
+ * Bukkit implementation of the Kvantum {@link LogWrapper},
+ * that passes all messages to the Bukkit console sender
+ */
+final class BukkitLogWrapper implements LogWrapper
 {
 
     private PrintStream logStream;
@@ -62,22 +66,19 @@ class BukkitLogWrapper implements LogWrapper
     }
 
     @Override
-    public void log(final LogContext logContext)
+    public void log(@NonNull final LogContext logContext)
     {
-        Assert.notNull( logContext );
-
         String replacedMessage = StrSubstitutor.replace( CoreConfig.Logging.logFormat, logContext.toMap() );
         if ( getPrintStream() != null )
         {
             getPrintStream().println( replacedMessage );
         }
-
         Bukkit.getConsoleSender()
                 .sendMessage( ChatColor.translateAlternateColorCodes( '&', replacedMessage ) );
     }
 
     @Override
-    public void log(String s)
+    public void log(@NonNull String s)
     {
         Bukkit.getConsoleSender().sendMessage( "Web > " + s );
     }
